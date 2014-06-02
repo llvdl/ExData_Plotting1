@@ -6,6 +6,8 @@
 # the data set will only contain rows for the dates 2007/02/01 and 2007/02/02
 #
 # missing values have a NA value
+#
+# an extra column datetime is added containing the parsed datetime values
 loadData <- function() {
     
     DATA_FOLDER <- 'data'
@@ -91,5 +93,10 @@ loadData <- function() {
     }
     
     assertDataExists()
-    read.csv(DATA_FILE_TRIMMED_TXT, na.strings = '?', sep=";")
+    data <- read.csv(DATA_FILE_TRIMMED_TXT, na.strings = '?', sep=";")
+    
+    datesClean <- gsub('^(\\d)/(\\d)/', '0\\1/0\\2/', data$Date)
+    data$datetime <- strptime(paste(datesClean, data$Time),format='%d/%m/%Y %H:%M:%s')
+    
+    data
 }
