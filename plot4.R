@@ -5,7 +5,7 @@ source('inc/create_png.R')
 
 createPlot <- function() {
     data <- loadData()
-
+    
     par(mfrow = c(2, 2), mar = c(4, 4, 2, 1))
     
     with(data, plot(datetime, Global_active_power, ylab='Global Active Power', xlab='',type='l'))
@@ -24,7 +24,7 @@ createPlot <- function() {
            c('Sub_metering_1', 'Sub_metering_2', 'Sub_metering_3'), 
            lty=c(1,1),
            col=c('black', 'red', 'blue'),
-            bty='n')
+           bty='n')
     
     with(data, plot(datetime, Global_reactive_power, type='l'))
 }
